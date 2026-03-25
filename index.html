@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#0a0c12">
+    <meta name="description" content="AYDAMIN.lyrics">
+    <title>AYDAMIN.lyrics</title>
+    
+    <!-- Open Graph / Facebook / VK / Telegram -->
+    <meta property="og:title" content="AYDAMIN.lyrics">
+    <meta property="og:description" content="AYDAMIN.lyrics">
+    <meta property="og:image" content="https://AYDAMIN.github.io/AYDAMINLYRICS/og-image.jpg">
+    <meta property="og:url" content="https://AYDAMIN.github.io/AYDAMINLYRICS/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AYDAMIN">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AYDAMIN.lyrics">
+    <meta name="twitter:description" content="AYDAMIN.lyrics">
+    <meta name="twitter:image" content="https://AYDAMIN.github.io/AYDAMINLYRICS/og-image.jpg">
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            color: white;
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+        body.bg-color {
+            background: #0a0c12;
+        }
+        body.bg-blur {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            transition: background-image 0.3s ease;
+        }
+        body.bg-blur::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(12px);
+            transform: scale(1.08);
+            z-index: -2;
+        }
+        body.bg-blur::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: -1;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .title-screen,
+        .song-screen,
+        .about-screen {
+            animation: fadeIn 0.4s ease-out;
+        }
+        .album-card {
+            transition: transform 0.3s ease;
+        }
+        .album-card:hover {
+            transform: translateY(-5px);
+        }
+        .settings-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 300;
+        }
+        .settings-btn {
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+        }
+        .settings-btn:hover {
+            background: rgba(0, 120, 255, 0.8);
+            transform: scale(1.02);
+        }
+        .settings-btn:active {
+            transform: scale(0.96);
+        }
+        .settings-dropdown {
+            position: absolute;
+            top: 52px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 12px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.2s ease;
+            min-width: 180px;
+        }
+        .settings-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .settings-dropdown label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            padding: 8px 8px;
+            border-radius: 30px;
+            transition: background 0.15s ease;
+        }
+        .settings-dropdown label:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .title-screen {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px 20px 60px;
+        }
+        .brand-header {
+            width: 100%;
+            max-width: 500px;
+            margin: 8px auto 16px auto;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70px;
+        }
+        .brand-logo-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 0;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+        .brand-logo-img:hover {
+            transform: scale(1.02);
+        }
+        .artist-name {
+            font-size: clamp(2.4rem, 10vw, 4.2rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #FFFFFF, #aaaaff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px rgba(0, 150, 255, 0.4);
+            text-align: center;
+            line-height: 1.2;
+        }
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-track {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.6);
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .album-card {
+            flex: 0 0 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 4px;
+        }
+        .album-cover {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.2s;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+            background: #1e1e2a;
+        }
+        .album-cover:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.6);
+        }
+        .album-cover:active {
+            transform: scale(0.97);
+        }
+        .album-title {
+            margin-top: 16px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            padding: 5px 14px;
+            border-radius: 60px;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 60px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 25;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+        }
+        .carousel-arrow:hover {
+            background: rgba(0, 120, 255, 0.85);
+            transform: translateY(-50%) scale(1.05);
+        }
+        .carousel-arrow:active {
+            transform: translateY(-50%) scale(0.94);
+        }
+        .arrow-left {
+            left: -32px;
+        }
+        .arrow-right {
+            right: -32px;
+        }
+        @media (max-width: 520px) {
+            .carousel-arrow {
+                width: 48px;
+                height: 48px;
+                font-size: 2.5rem;
+            }
+            .arrow-left {
+                left: -24px;
+            }
+            .arrow-right {
+                right: -24px;
+            }
+        }
+        .tracklist {
+            margin-top: 24px;
+            width: 100%;
+            max-width: 460px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tracklist.hidden {
+            opacity: 0;
+            transform: translateY(-15px);
+            display: flex;
+            pointer-events: none;
+            margin-top: 0;
+            gap: 0;
+        }
+        .tracklist.hidden .track-btn,
+        .tracklist.hidden .about-album-btn {
+            display: none;
+        }
+        .track-btn,
+        .about-album-btn {
+            animation: fadeInUp 0.3s ease-out;
+            transition: all 0.2s ease;
+        }
+        .track-btn {
+            background: rgba(20, 20, 40, 0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+        .track-btn:hover {
+            background: rgba(0, 120, 255, 0.7);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.02);
+        }
+        .track-btn:active {
+            transform: scale(0.98);
+        }
+        .about-album-btn {
+            background: rgba(100, 100, 140, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px;
+            border-radius: 60px;
+            margin-top: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .about-album-btn:hover {
+            background: rgba(0, 120, 255, 0.7);
+            transform: scale(1.02);
+        }
+        .permanent-blocks {
+            width: 100%;
+            max-width: 460px;
+            margin-top: 24px;
+        }
+        .streaming-block {
+            margin-top: 0;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        .streaming-title {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        .streaming-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+        .streaming-icon {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .streaming-icon:hover {
+            background: rgba(0, 120, 255, 0.7);
+            transform: scale(1.02);
+        }
+        .streaming-icon i {
+            font-size: 1.1rem;
+        }
+        .install-block {
+            margin-top: 16px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .install-app-btn {
+            background: linear-gradient(135deg, #0077ff, #00ccff);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .install-app-btn:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #0088ff, #00ddff);
+        }
+        .ios-instruction {
+            font-size: 12px;
+            color: #aaa;
+            text-align: center;
+            margin-top: 8px;
+        }
+        .song-screen,
+        .about-screen {
+            display: none;
+            padding: 20px;
+            min-height: 100vh;
+            padding-top: 80px;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            border: none;
+            color: white;
+            font-size: 42px;
+            width: 56px;
+            height: 56px;
+            border-radius: 60px;
+            cursor: pointer;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 300;
+            transition: all 0.2s ease;
+        }
+        .back-btn:hover {
+            background: #0077ff;
+            transform: scale(1.05);
+        }
+        .back-btn:active {
+            transform: scale(0.92);
+        }
+        .song-title {
+            font-size: 1.8rem;
+            margin-bottom: 28px;
+            text-align: center;
+            font-weight: 800;
+            padding-top: 20px;
+            animation: fadeInUp 0.4s ease-out;
+        }
+        .song-text,
+        .about-text {
+            line-height: 1.75;
+            font-size: 1rem;
+            text-align: left;
+            white-space: pre-line;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(8px);
+            padding: 28px 24px;
+            border-radius: 32px;
+            max-width: 680px;
+            margin: 0 auto;
+            font-family: inherit;
+            animation: scaleIn 0.4s ease-out;
+        }
+        .album-name-small {
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.2);
+        }
+        .dot.active {
+            width: 24px;
+            background: white;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.75rem;
+            opacity: 0.5;
+            padding: 20px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        @media (min-width: 1024px) {
+            .carousel-container {
+                max-width: 420px;
+            }
+            .tracklist {
+                max-width: 520px;
+            }
+            .brand-header {
+                max-width: 600px;
+            }
+            .brand-logo-img {
+                max-height: 100px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-color">
+    <div class="settings-menu">
+        <div class="settings-btn" id="settingsToggle">НАСТРОЙКИ</div>
+        <div class="settings-dropdown" id="settingsDropdown">
+            <label><input type="radio" name="bgmode" value="color" checked>ТЁМНЫЙ ФОН</label>
+            <label><input type="radio" name="bgmode" value="blur">РАЗМЫТОЕ ИЗОБРАЖЕНИЕ</label>
+        </div>
+    </div>
+
+    <div id="titleScreen" class="title-screen">
+        <div id="brandHeader" class="brand-header"></div>
+        <div class="carousel-container">
+            <button class="carousel-arrow arrow-left" id="prevAlbumBtn">‹</button>
+            <div class="carousel-track">
+                <div class="carousel-inner" id="carouselInner"></div>
+            </div>
+            <button class="carousel-arrow arrow-right" id="nextAlbumBtn">›</button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <div id="tracklistContainer" class="tracklist hidden"></div>
+        
+        <div class="permanent-blocks">
+            <div class="streaming-block">
+                <div class="streaming-title">СЛУШАТЬ НА ПЛОЩАДКАХ</div>
+                <div class="streaming-icons" id="streamingIcons"></div>
+            </div>
+            <div class="install-block">
+                <button id="installAppBtn" class="install-app-btn">УСТАНОВИТЬ ПРИЛОЖЕНИЕ</button>
+                <div id="iosInstruction" class="ios-instruction" style="display: none;">Нажмите Поделиться → На экран Домой</div>
+            </div>
+        </div>
+        
+        <div class="footer">AYDAMIN 2026</div>
+    </div>
+
+    <div id="songScreen" class="song-screen">
+        <button class="back-btn" onclick="showTitleScreen()">‹</button>
+        <div class="album-name-small" id="currentAlbumName"></div>
+        <h2 class="song-title" id="songTitle"></h2>
+        <div class="song-text" id="songText"></div>
+    </div>
+
+    <div id="aboutScreen" class="about-screen">
+        <button class="back-btn" onclick="showTitleScreen()">‹</button>
+        <div class="album-name-small" id="aboutAlbumName"></div>
+        <h2 class="song-title">ОБ АЛЬБОМЕ</h2>
+        <div class="about-text" id="aboutText"></div>
+    </div>
+
+    <script>
+        let albumsData = null;
+        let currentIndex = 0;
+        let currentActiveRelease = null;
+        let tracklistVisible = false;
+        let currentBgMode = 'color';
+        let deferredPrompt = null;
+
+        const titleScreen = document.getElementById('titleScreen');
+        const songScreen = document.getElementById('songScreen');
+        const aboutScreen = document.getElementById('aboutScreen');
+        const carouselInner = document.getElementById('carouselInner');
+        const tracklistContainer = document.getElementById('tracklistContainer');
+        const dotsContainer = document.getElementById('carouselDots');
+        const brandHeaderDiv = document.getElementById('brandHeader');
+        const prevBtn = document.getElementById('prevAlbumBtn');
+        const nextBtn = document.getElementById('nextAlbumBtn');
+        const settingsToggle = document.getElementById('settingsToggle');
+        const settingsDropdown = document.getElementById('settingsDropdown');
+        const radioButtons = document.querySelectorAll('input[name="bgmode"]');
+        const streamingIconsContainer = document.getElementById('streamingIcons');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function loadData() {
+            return fetch('albums.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load albums.json');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    albumsData = data;
+                    renderStreamingLinks();
+                    renderCarousel();
+                    updateBrandHeader();
+                    return data;
+                })
+                .catch(error => {
+                    console.error('Error loading albums:', error);
+                    carouselInner.innerHTML = '<div class="loading">Ошибка загрузки данных</div>';
+                });
+        }
+
+        function renderStreamingLinks() {
+            if (!albumsData || !albumsData.streaming) return;
+            const links = albumsData.streaming;
+            const platforms = [
+                { key: 'spotify', icon: 'fab fa-spotify', name: 'Spotify' },
+                { key: 'vk', icon: 'fab fa-vk', name: 'VK Музыка' },
+                { key: 'yandex', icon: 'fab fa-yandex', name: 'Яндекс Музыка' },
+                { key: 'sber', icon: 'fas fa-music', name: 'СберЗвук' }
+            ];
+            streamingIconsContainer.innerHTML = '';
+            platforms.forEach(platform => {
+                if (links[platform.key] && links[platform.key] !== '#') {
+                    const a = document.createElement('a');
+                    a.href = links[platform.key];
+                    a.target = '_blank';
+                    a.className = 'streaming-icon';
+                    a.innerHTML = `<i class="${platform.icon}"></i> ${platform.name}`;
+                    streamingIconsContainer.appendChild(a);
+                }
+            });
+        }
+
+        function renderCarousel() {
+            if (!albumsData || !albumsData.albums) return;
+            carouselInner.innerHTML = '';
+            albumsData.albums.forEach((release, idx) => {
+                const div = document.createElement('div');
+                div.className = 'album-card';
+                const coverUrl = release.cover || 'https://via.placeholder.com/500/1e1e2a/ffffff?text=NO+COVER';
+                div.innerHTML = `<img class="album-cover" src="${coverUrl}" alt="${release.name}" data-idx="${idx}"><div class="album-title">${release.name}</div>`;
+                div.querySelector('.album-cover').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleTracklistForRelease(release, idx);
+                });
+                carouselInner.appendChild(div);
+            });
+            updateCarouselPosition();
+            renderDots();
+        }
+
+        function updateCarouselPosition() {
+            if (!albumsData || !albumsData.albums) return;
+            carouselInner.style.transform = `translateX(${-currentIndex * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                if (i === currentIndex) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+            hideTracklist();
+            const r = albumsData.albums[currentIndex];
+            updateBrandHeader();
+            if (currentBgMode === 'blur' && r) updateBackground(r.bgImage);
+            else if (currentBgMode === 'color') document.body.style.background = '#0a0c12';
+        }
+
+        function renderDots() {
+            if (!albumsData || !albumsData.albums) return;
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < albumsData.albums.length; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === currentIndex) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateCarouselPosition();
+                    hideTracklist();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function toggleTracklistForRelease(release, idx) {
+            if (tracklistVisible && currentActiveRelease === release) {
+                hideTracklist();
+                return;
+            }
+            buildTracklist(release);
+            tracklistContainer.classList.remove('hidden');
+            tracklistVisible = true;
+            currentActiveRelease = release;
+            if (currentIndex !== idx) {
+                currentIndex = idx;
+                updateCarouselPosition();
+            }
+        }
+
+        function buildTracklist(release) {
+            tracklistContainer.innerHTML = '';
+            if (release.songs && release.songs.length) {
+                release.songs.forEach(song => {
+                    const btn = document.createElement('button');
+                    btn.className = 'track-btn';
+                    btn.textContent = song.title;
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        showSongScreen(release, song);
+                    });
+                    tracklistContainer.appendChild(btn);
+                });
+            }
+            if (release.about) {
+                const aboutBtn = document.createElement('button');
+                aboutBtn.className = 'about-album-btn';
+                aboutBtn.textContent = 'ОБ АЛЬБОМЕ';
+                aboutBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showAboutScreen(release);
+                });
+                tracklistContainer.appendChild(aboutBtn);
+            }
+        }
+
+        function hideTracklist() {
+            tracklistContainer.classList.add('hidden');
+            tracklistVisible = false;
+            currentActiveRelease = null;
+        }
+
+        function showSongScreen(release, song) {
+            document.getElementById('songTitle').textContent = song.title;
+            document.getElementById('songText').textContent = song.text;
+            document.getElementById('currentAlbumName').textContent = release.name;
+            if (currentBgMode === 'blur' && release.bgImage) updateBackground(release.bgImage);
+            titleScreen.style.display = 'none';
+            songScreen.style.display = 'block';
+            aboutScreen.style.display = 'none';
+        }
+
+        function showAboutScreen(release) {
+            document.getElementById('aboutText').textContent = release.about || 'Информация отсутствует';
+            document.getElementById('aboutAlbumName').textContent = release.name;
+            if (currentBgMode === 'blur' && release.bgImage) updateBackground(release.bgImage);
+            titleScreen.style.display = 'none';
+            aboutScreen.style.display = 'block';
+            songScreen.style.display = 'none';
+        }
+
+        function showTitleScreen() {
+            titleScreen.style.display = 'flex';
+            songScreen.style.display = 'none';
+            aboutScreen.style.display = 'none';
+            hideTracklist();
+            updateBrandHeader();
+            
+            // При возврате на главный экран ставим фон по умолчанию
+            if (currentBgMode === 'blur') {
+                if (albumsData && albumsData.defaultBg) {
+                    updateBackground(albumsData.defaultBg);
+                } else {
+                    updateBackground('https://picsum.photos/id/1/1200/800');
+                }
+            } else {
+                document.body.style.background = '#0a0c12';
+                document.body.classList.add('bg-color');
+                document.body.classList.remove('bg-blur');
+            }
+        }
+
+        function updateBrandHeader() {
+            if (!albumsData || !albumsData.albums) return;
+            const r = albumsData.albums[currentIndex];
+            if (!r) return;
+            if (r.brandImage && r.brandImage.trim()) {
+                brandHeaderDiv.innerHTML = `<img class="brand-logo-img" src="${r.brandImage}" alt="логотип" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\"artist-name\">AYDAMIN</div>';">`;
+            } else if (albumsData.brandImage && albumsData.brandImage.trim()) {
+                brandHeaderDiv.innerHTML = `<img class="brand-logo-img" src="${albumsData.brandImage}" alt="логотип" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\"artist-name\">AYDAMIN</div>';">`;
+            } else {
+                brandHeaderDiv.innerHTML = `<div class="artist-name">AYDAMIN</div>`;
+            }
+        }
+
+        function setBgMode(mode) {
+            currentBgMode = mode;
+            if (mode === 'color') {
+                document.body.classList.remove('bg-blur');
+                document.body.classList.add('bg-color');
+                document.body.style.background = '#0a0c12';
+                document.body.style.backgroundImage = 'none';
+            } else {
+                document.body.classList.remove('bg-color');
+                document.body.classList.add('bg-blur');
+                const r = albumsData ? albumsData.albums[currentIndex] : null;
+                if (r && r.bgImage) updateBackground(r.bgImage);
+                else if (albumsData && albumsData.defaultBg) updateBackground(albumsData.defaultBg);
+                else updateBackground('https://picsum.photos/id/1/1200/800');
+            }
+        }
+
+        function updateBackground(imgUrl) {
+            if (currentBgMode === 'blur' && imgUrl) {
+                document.body.style.backgroundImage = `url(${imgUrl})`;
+                document.body.classList.add('bg-blur');
+                document.body.classList.remove('bg-color');
+            } else if (currentBgMode === 'color') {
+                document.body.style.background = '#0a0c12';
+                document.body.classList.remove('bg-blur');
+                document.body.classList.add('bg-color');
+            }
+        }
+
+        function nextAlbum() {
+            if (!albumsData || !albumsData.albums) return;
+            currentIndex = (currentIndex + 1) % albumsData.albums.length;
+            updateCarouselPosition();
+            hideTracklist();
+        }
+
+        function prevAlbum() {
+            if (!albumsData || !albumsData.albums) return;
+            currentIndex = (currentIndex - 1 + albumsData.albums.length) % albumsData.albums.length;
+            updateCarouselPosition();
+            hideTracklist();
+        }
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+        function handleTouchStart(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }
+        function handleTouchEnd(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            if (Math.abs(touchEndX - touchStartX) > 50) {
+                if (touchEndX > touchStartX) prevAlbum();
+                else nextAlbum();
+            }
+        }
+        const trackEl = document.querySelector('.carousel-track');
+        if (trackEl) {
+            trackEl.addEventListener('touchstart', handleTouchStart);
+            trackEl.addEventListener('touchend', handleTouchEnd);
+        }
+
+        settingsToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            settingsDropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', (e) => {
+            if (!settingsToggle.contains(e.target) && !settingsDropdown.contains(e.target)) {
+                settingsDropdown.classList.remove('open');
+            }
+        });
+        radioButtons.forEach(r => {
+            r.addEventListener('change', (e) => {
+                if (e.target.checked) setBgMode(e.target.value);
+                settingsDropdown.classList.remove('open');
+            });
+        });
+
+        const installBtn = document.getElementById('installAppBtn');
+        const iosInstructionDiv = document.getElementById('iosInstruction');
+        if (installBtn) {
+            installBtn.addEventListener('click', () => {
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                if (isIOS) {
+                    iosInstructionDiv.style.display = 'block';
+                    setTimeout(() => {
+                        iosInstructionDiv.style.opacity = '0';
+                        setTimeout(() => {
+                            iosInstructionDiv.style.display = 'none';
+                            iosInstructionDiv.style.opacity = '1';
+                        }, 2000);
+                    }, 5000);
+                    return;
+                }
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(() => deferredPrompt = null);
+                } else {
+                    alert('Нажмите Добавить на главный экран в меню браузера');
+                }
+            });
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(err => console.log(err));
+        }
+
+        loadData().then(() => {
+            showTitleScreen();
+            prevBtn.addEventListener('click', prevAlbum);
+            nextBtn.addEventListener('click', nextAlbum);
+            setBgMode('color');
+        });
+    </script>
+</body>
+</html>
