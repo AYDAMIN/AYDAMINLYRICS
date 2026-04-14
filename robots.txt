@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://aydamin.github.io/AYDAMINLYRICS/sitemap.xml
+Host: aydamin.github.io

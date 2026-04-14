@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Главная -->
+    <url>
+        <loc>https://aydamin.github.io/AYDAMINLYRICS/</loc>
+        <lastmod>2026-04-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Альбомы -->
+    <url>
+        <loc>https://aydamin.github.io/AYDAMINLYRICS/#album/album1</loc>
+        <lastmod>2026-04-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://aydamin.github.io/AYDAMINLYRICS/#album/album2</loc>
+        <lastmod>2026-04-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://aydamin.github.io/AYDAMINLYRICS/#album/album3</loc>
+        <lastmod>2026-04-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://aydamin.github.io/AYDAMINLYRICS/#album/album4</loc>
+        <lastmod>2026-04-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://aydamin.github.io/AYDAMINLYRICS/#album/single1</loc>
+        <lastmod>2026-04-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Треки Альбома I -->
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/ПРИВЕТ</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/ХОЧУ</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/ДЛИННЕЕ</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    
+    <!-- Треки Альбома II -->
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/ВХОД</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/Я ИДУ ПО СВЕТУ</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/ТВОИ</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/О ТЕБЕ</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/ГОРОД ТЁМНЫЙ</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/БЁДРАМИ</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/КАРТИНА</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+    
+    <!-- Треки Альбома III -->
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/СКОРО</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+    
+    <!-- Треки MELDAMIN -->
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/СКОРО</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+    
+    <!-- Сингл ХОЧУ 2 -->
+    <url><loc>https://aydamin.github.io/AYDAMINLYRICS/#song/ХОЧУ 2</loc><lastmod>2026-04-14</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+</urlset>
