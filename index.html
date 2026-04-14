@@ -37,7 +37,7 @@
     <meta name="twitter:image" content="https://aydamin.github.io/AYDAMINLYRICS/og-image.jpg">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="AYDAMINLYRICS/manifest.json">
     
     <style>
         * {
@@ -771,7 +771,7 @@ DOM.shareSongBtn.addEventListener('click', () => {
             async function loadData() {
                 showLoader();
                 try {
-                    const response = await fetch('albums.json');
+                    const response = await fetch('AYDAMINLYRICS/albums.json');
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
                     const data = await response.json();
                     if (!data.albums || !Array.isArray(data.albums)) throw new Error('Неверная структура');
@@ -961,7 +961,7 @@ DOM.shareSongBtn.addEventListener('click', () => {
             // ---------- ЗАПУСК ----------
             initParticles();
             loadData();
-            if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+            if ('serviceWorker' in navigator) navigator.serviceWorker.register('AYDAMINLYRICS/sw.js');
         })();
     </script>
 </body>
